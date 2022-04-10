@@ -6,8 +6,17 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx,.vue",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx,.vue",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,vue,md,json}'"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,vue}": "npm run lint",
+    "**/*.{js,jsx,tsx,ts,vue,md,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "vue": "^3.2.25"
@@ -23,9 +32,11 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-vue": "^8.6.0",
+    "lint-staged": "^12.3.7",
     "prettier": "^2.6.2",
     "typescript": "^4.5.4",
     "vite": "^2.9.0",
-    "vue-tsc": "^0.29.8"
+    "vue-tsc": "^0.29.8",
+    "yorkie": "^2.0.0"
   }
 }
