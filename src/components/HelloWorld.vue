@@ -22,7 +22,7 @@ const add = () => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .hello {
   text-align: center;
 }
