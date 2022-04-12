@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+type Props = {
+  msg: string;
+};
 
-defineProps<{ msg: string }>();
+defineProps<Props>();
 
 // 自定义事件
-const emit = defineEmits(['onSuccess']);
+const emit = defineEmits<{
+  (e: 'onSuccess', id: number): void;
+}>();
 
-const count = ref(0);
+const count = ref<number>(0);
 
 const add = () => {
   count.value++;
@@ -18,7 +23,7 @@ const add = () => {
     <h1>{{ msg }}</h1>
     <button type="button" @click="add()">count is: {{ count }}</button>
     <br />
-    <button @click="emit('onSuccess')">触发自定义事件</button>
+    <button @click="emit('onSuccess', 111)">触发自定义事件</button>
   </div>
 </template>
 

@@ -5,3 +5,4 @@
 ## 注意
 
 - import vue 文件时, 不能省略.vue(会导致 TS 无法识别)
+- defineProps<Props>(), Props 类型只能在当前 vue 文件中定义: vue 文件是独立编译的, 目前版本不会抓取导入的文件分析源类型

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import HelloWorld from '../../components/HelloWorld.vue';
-const handleSuccess = () => {
-  console.log('success');
+const handleSuccess = (id: number) => {
+  console.log('success', id);
 };
 </script>
 <template>
