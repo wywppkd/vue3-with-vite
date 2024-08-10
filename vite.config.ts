@@ -10,4 +10,13 @@ export default defineConfig({
       '@': join(__dirname, 'src'),
     },
   },
+  build: {
+    rollupOptions: {
+      manualChunks(id) {
+        if (id.includes('node_modules')) {
+          return 'vendor';
+        }
+      },
+    },
+  },
 });
