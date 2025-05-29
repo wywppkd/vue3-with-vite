@@ -7,7 +7,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx,.vue",
-    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,vue,md,json}'"
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,vue,md,json}'",
+    "setup": "docker compose up --build -d",
+    "shutdown": "docker compose down"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

@@ -1,0 +1,29 @@
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# 安装 yarn v1
+RUN npm install -g yarn@1.22.22
+
+COPY package.json yarn.lock ./
+
+# 安装依赖: 如果 pkg 和 lock 没有变化, 则这一步会直接使用上次缓存结果(仅针对同一台 Runner)
+# --frozen-lockfile 严格按照 yarn.lock 文件安装
+# 清理 Yarn 缓存以减小镜像体积
+RUN yarn install --frozen-lockfile && yarn cache clean
+
+# 复制项目源码到 app
+COPY . . 
+
+# 构建项目
+RUN yarn run build
+
+# ----------------------------------------------------------
+FROM nginx:1.27-alpine
+
+COPY --from=builder /app/dist /usr/share/nginx/html/
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"] 

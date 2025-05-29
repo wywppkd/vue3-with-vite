@@ -1,0 +1,20 @@
+# docker-compose.yml
+
+# 等价于: docker run -d -p 8080:80 --name my-vue3-app my-vue3-app
+services:
+  # 定义一个名为 'web' 的服务
+  web:
+    # 查找 Dockerfile 并执行构建过程
+    build:
+      context: .
+      dockerfile: Dockerfile_Front
+    # 可选：为容器指定一个固定的名称
+    container_name: my-vue3-app
+    # 端口映射：将宿主机的 80 端口映射到容器内部的 80 端口
+    # 容器内部的 80 端口正是你的 Nginx 监听的端口（通过 EXPOSE 80）
+    ports:
+      - '8080:80'
+    # 重启策略：当容器退出时，除非手动停止，否则总是重启
+    restart: unless-stopped
+# docker compose up --build -d 编译镜像并启动容器
+# docker compose down 停止并删除容器(保留镜像)
